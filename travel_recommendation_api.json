@@ -1,0 +1,68 @@
+{
+  "beaches": [
+    {
+      "name": "Bora Bora, Polynésie française",
+      "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=85",
+      "description": "Un lagon turquoise, des récifs colorés et des bungalows sur pilotis pour une escapade hors du temps."
+    },
+    {
+      "name": "Copacabana, Brésil",
+      "imageUrl": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=1000&q=85",
+      "description": "Une plage animée de Rio bordée de montagnes, de musique et d'une énergie brésilienne contagieuse."
+    },
+    {
+      "name": "Anse Source d'Argent, Seychelles",
+      "imageUrl": "https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=1000&q=85",
+      "description": "Des rochers de granit sculptés par le temps et une eau claire dans un décor spectaculaire."
+    }
+  ],
+  "temples": [
+    {
+      "name": "Temple de Kinkaku-ji, Japon",
+      "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1000&q=85",
+      "description": "Le Pavillon d'Or de Kyoto se reflète dans son étang au milieu de jardins paisibles."
+    },
+    {
+      "name": "Angkor Wat, Cambodge",
+      "imageUrl": "https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?auto=format&fit=crop&w=1000&q=85",
+      "description": "Un immense complexe khmer où les tours de pierre racontent l'histoire d'une civilisation fascinante."
+    },
+    {
+      "name": "Temple de Borobudur, Indonésie",
+      "imageUrl": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85",
+      "description": "Un sanctuaire monumental entouré de brume et de volcans, célèbre pour ses stupas et ses reliefs."
+    }
+  ],
+  "countries": [
+    {
+      "name": "Australie",
+      "cities": [
+        {
+          "name": "Sydney, Australie",
+          "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d3?auto=format&fit=crop&w=1000&q=85",
+          "description": "Une ville lumineuse entre plages, architecture emblématique et quartiers créatifs."
+        },
+        {
+          "name": "Melbourne, Australie",
+          "imageUrl": "https://images.unsplash.com/photo-1514395462725-fb4566210144?auto=format&fit=crop&w=1000&q=85",
+          "description": "Une capitale culturelle réputée pour ses cafés, son art urbain et ses marchés."
+        }
+      ]
+    },
+    {
+      "name": "Japon",
+      "cities": [
+        {
+          "name": "Tokyo, Japon",
+          "imageUrl": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000&q=85",
+          "description": "Une métropole fascinante où traditions anciennes et innovation se rencontrent à chaque rue."
+        },
+        {
+          "name": "Kyoto, Japon",
+          "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1000&q=85",
+          "description": "Une ville de temples, de jardins et de maisons traditionnelles au charme intemporel."
+        }
+      ]
+    }
+  ]
+}

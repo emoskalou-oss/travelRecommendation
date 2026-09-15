@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="TravelBloom, des recommandations de voyage pour explorer le monde.">
+	<title>TravelBloom | Recommandations de voyage</title>
+	<style>
+		:root {
+			--ink: #102f3b;
+			--teal: #0d7774;
+			--coral: #ed765f;
+			--paper: #fffaf2;
+			--muted: #5a6b70;
+		}
+
+		* { box-sizing: border-box; }
+
+		html { scroll-behavior: smooth; }
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: var(--paper);
+			font-family: Georgia, "Times New Roman", serif;
+		}
+
+		.site-header {
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+			min-height: 76px;
+			padding: 14px clamp(20px, 5vw, 72px);
+			color: white;
+			background: var(--ink);
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 12px;
+			color: white;
+			font-size: 1.55rem;
+			font-weight: 700;
+			letter-spacing: .02em;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+
+		.brand-mark {
+			display: grid;
+			width: 42px;
+			height: 42px;
+			place-items: center;
+			border: 2px solid var(--coral);
+			border-radius: 50%;
+			color: var(--coral);
+			font-size: 1.4rem;
+		}
+
+		.main-nav { display: flex; gap: clamp(14px, 3vw, 36px); }
+		.main-nav a { color: white; text-decoration: none; font-size: 1rem; }
+		.main-nav a:hover, .main-nav a:focus-visible { color: var(--coral); }
+
+		.search-bar {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 5px 6px 5px 14px;
+			border-radius: 999px;
+			background: white;
+		}
+
+		.search-bar input {
+			width: clamp(150px, 18vw, 250px);
+			border: 0;
+			outline: 0;
+			color: var(--ink);
+			font: inherit;
+		}
+
+		button {
+			border: 0;
+			border-radius: 999px;
+			padding: 10px 17px;
+			color: white;
+			background: var(--teal);
+			cursor: pointer;
+			font: 700 .86rem Georgia, "Times New Roman", serif;
+		}
+
+		button:hover, button:focus-visible { background: var(--coral); }
+		.clear-button { background: var(--ink); }
+
+		.hero {
+			position: relative;
+			min-height: 620px;
+			padding: clamp(90px, 15vh, 170px) clamp(24px, 9vw, 130px);
+			overflow: hidden;
+			color: white;
+			background: linear-gradient(90deg, rgba(16,47,59,.9), rgba(16,47,59,.24)), url("https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=2000&q=85") center/cover;
+		}
+
+		.hero-copy { max-width: 650px; animation: rise .7s ease-out both; }
+		.eyebrow { margin: 0 0 16px; color: #ffd4a8; font-size: .9rem; letter-spacing: .18em; text-transform: uppercase; }
+		h1 { max-width: 650px; margin: 0; font-size: clamp(3rem, 7vw, 6.8rem); line-height: .92; letter-spacing: -.04em; }
+		.hero-copy p { max-width: 570px; margin: 28px 0; font-size: 1.15rem; line-height: 1.6; }
+		.primary-action { border-radius: 4px; padding: 13px 22px; background: var(--coral); }
+
+		.social-links { position: absolute; bottom: 36px; left: clamp(24px, 3vw, 48px); display: flex; gap: 18px; }
+		.social-links a { color: white; font-size: .9rem; text-decoration: none; }
+
+		.results-section { display: none; padding: 64px clamp(24px, 8vw, 120px); background: #f4eadb; }
+		.results-section.visible { display: block; }
+		.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+		h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.6rem); }
+		.result-status { margin: 0; color: var(--muted); }
+		.results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+		.result-card { overflow: hidden; border: 1px solid #e2d3bf; background: white; box-shadow: 0 8px 20px rgba(16,47,59,.08); }
+		.result-card img { display: block; width: 100%; height: 210px; object-fit: cover; }
+		.result-card-content { padding: 18px; }
+		.result-card h3 { margin: 0 0 8px; font-size: 1.35rem; }
+		.result-card p { margin: 0; color: var(--muted); line-height: 1.5; }
+
+		.info-section { display: none; min-height: 540px; padding: 90px clamp(24px, 9vw, 130px); background: var(--paper); }
+		.info-section.visible { display: block; }
+		.info-section > p { max-width: 780px; color: var(--muted); font-size: 1.15rem; line-height: 1.7; }
+		.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 38px; }
+		.team-member { padding: 24px; border-top: 4px solid var(--coral); background: white; }
+		.team-member h3 { margin: 0 0 4px; }
+		.team-member p { margin: 0; color: var(--muted); }
+
+		.contact-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: center; }
+		.contact-form { display: grid; gap: 14px; max-width: 560px; padding: 28px; border: 1px solid #e2d3bf; background: white; }
+		.contact-form label { display: grid; gap: 6px; font-weight: 700; }
+		.contact-form input, .contact-form textarea { width: 100%; padding: 12px; border: 1px solid #c9d0cd; font: inherit; }
+		.contact-form textarea { min-height: 130px; resize: vertical; }
+		.form-message { min-height: 1.2em; margin: 0; color: var(--teal); }
+
+		@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+		@media (max-width: 850px) {
+			.site-header { flex-wrap: wrap; }
+			.main-nav { order: 3; width: 100%; justify-content: center; }
+			.search-bar { margin-left: auto; }
+			.hero { min-height: 560px; }
+			.team-grid, .contact-layout { grid-template-columns: 1fr; }
+		}
+
+		@media (max-width: 520px) {
+			.site-header { gap: 14px; padding: 12px 16px; }
+			.brand { font-size: 1.2rem; }
+			.brand-mark { width: 36px; height: 36px; }
+			.search-bar { width: 100%; order: 2; }
+			.search-bar input { flex: 1; width: auto; }
+			.hero { min-height: 610px; padding: 88px 24px 120px; }
+			.social-links { bottom: 32px; }
+			.section-heading { display: block; }
+			.result-status { margin-top: 8px; }
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<a class="brand" href="#home" aria-label="TravelBloom, accueil"><span class="brand-mark" aria-hidden="true">✦</span>TravelBloom</a>
+		<nav class="main-nav" aria-label="Navigation principale">
+			<a href="#home">Accueil</a>
+			<a href="#about">À propos de nous</a>
+			<a href="#contact">Contactez-nous</a>
+		</nav>
+		<form class="search-bar" id="search-form" role="search">
+			<input id="search-input" type="search" placeholder="Plage, temple ou pays" aria-label="Rechercher une destination">
+			<span aria-hidden="true">⌕</span>
+			<button type="submit">Rechercher</button>
+			<button class="clear-button" id="clear-button" type="button">Effacer</button>
+		</form>
+	</header>
+
+	<main>
+		<section class="hero" id="home" aria-labelledby="hero-title">
+			<div class="hero-copy">
+				<p class="eyebrow">Carnets de voyage soigneusement choisis</p>
+				<h1 id="hero-title">Explorez. Rêvez. Partez.</h1>
+				<p>TravelBloom vous aide à découvrir des lieux remarquables, des cultures vivantes et des expériences qui donnent envie de regarder le monde autrement.</p>
+				<a class="primary-action" href="#recommendations">Réserver maintenant</a>
+			</div>
+			<div class="social-links" aria-label="Réseaux sociaux">
+				<a href="https://twitter.com" target="_blank" rel="noreferrer">Twitter</a>
+				<a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
+				<a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+				<a href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a>
+			</div>
+		</section>
+
+		<section class="results-section" id="recommendations" aria-live="polite" aria-labelledby="results-title">
+			<div class="section-heading">
+				<h2 id="results-title">Vos découvertes</h2>
+				<p class="result-status" id="result-status"></p>
+			</div>
+			<div class="results-grid" id="results-grid"></div>
+		</section>
+
+		<section class="info-section" id="about" aria-labelledby="about-title">
+			<h2 id="about-title">À propos de nous</h2>
+			<p>Nous sommes une équipe de passionnés qui rassemble des idées de voyage claires, inspirantes et accessibles. Notre mission est de transformer une simple recherche en une prochaine histoire à raconter, dans le respect des cultures et des communautés locales.</p>
+			<div class="team-grid">
+				<article class="team-member"><h3>John Doe</h3><p>Directeur général</p></article>
+				<article class="team-member"><h3>Celina Thomas</h3><p>Responsable technique</p></article>
+				<article class="team-member"><h3>Mike Tyson</h3><p>Responsable des partenariats</p></article>
+			</div>
+		</section>
+
+		<section class="info-section" id="contact" aria-labelledby="contact-title">
+			<div class="contact-layout">
+				<div><h2 id="contact-title">Contactez-nous</h2><p>Une destination en tête ou une question à partager ? Écrivez-nous.</p></div>
+				<form class="contact-form" id="contact-form">
+					<label for="name">Nom<input id="name" name="name" type="text" placeholder="Votre nom" required></label>
+					<label for="email">Email<input id="email" name="email" type="email" placeholder="Votre email" required></label>
+					<label for="message">Message<textarea id="message" name="message" placeholder="Votre message" required></textarea></label>
+					<button type="submit">Soumettre</button>
+					<p class="form-message" id="form-message" role="status"></p>
+				</form>
+			</div>
+		</section>
+	</main>
+	<script src="travel_recommendation.js"></script>
+</body>
+</html>
